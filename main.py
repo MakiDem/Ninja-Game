@@ -3,7 +3,7 @@ from sys import exit
 
 from pygame import Surface
 
-from scripts.entity import Entity
+from scripts.entity import Entity, Player
 from scripts.utils import load_image, load_image_list, Animation
 from scripts.tilemap import TileMap
 from scripts.clouds import Clouds
@@ -34,7 +34,7 @@ class Game:
         }
 
         self.clock = pygame.time.Clock()
-        self.player = Entity(self, 'player', (50,50), (8,15))
+        self.player = Player(self, (50,50), (8,15))
         self.movement = [False, False]
 
         self.tile_map = TileMap(self, tile_size=16)

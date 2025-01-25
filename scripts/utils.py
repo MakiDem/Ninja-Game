@@ -26,7 +26,7 @@ class Animation:
         self.frame_index = 0
         self.done = False
 
-    def copy(self):
+    def copy(self): #after previous action, current action will be reset to the start
         return Animation(self.frames, self.frame_dur, self.loop)
 
     def update(self):
