@@ -32,7 +32,6 @@ class Animation:
     def update(self):
         if self.loop:
             self.frame_index = (self.frame_index + 1) % (len(self.frames) * self.frame_dur)
-            print(self.frame_index)
         else:
             self.frame_index = min(self.frame_index+1, self.frame_dur * len(self.frames) - 1)
             if self.frame_index >= self.frame_dur * len(self.frames) - 1:
@@ -40,7 +39,3 @@ class Animation:
 
     def curr_frame(self):
         return self.frames[int(self.frame_index / self.frame_dur)]
-
-check = Animation([0,1,2])
-while True:
-    check.update()

@@ -26,7 +26,7 @@ class Game:
             'background': load_image('background.png'),
             'clouds': load_image_list('clouds'),
 
-            'player/idle': Animation(load_image_list('entities/player/idle'), frame_dur=6),
+            'player/idle': Animation(load_image_list('entities/player/idle'), frame_dur=4),
             'player/run': Animation(load_image_list('entities/player/run'), frame_dur=4),
             'player/slide': Animation(load_image_list('entities/player/slide'), frame_dur=6),
             'player/jump': Animation(load_image_list('entities/player/jump'), frame_dur=4),
