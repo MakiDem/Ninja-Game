@@ -15,4 +15,32 @@ def load_image_list(path):
 
     return images
 
-load_image_list('tiles/grass')
+
+
+class Animation:
+    def __init__(self, frames, frame_dur=5, loop=True):
+        self.frames = frames
+        self.loop = loop
+        self.frame_dur = frame_dur
+
+        self.frame_index = 0
+        self.done = False
+
+    def copy(self):
+        return Animation(self.frames, self.frame_dur, self.loop)
+
+    def update(self):
+        if self.loop:
+            self.frame_index = (self.frame_index + 1) % (len(self.frames) * self.frame_dur)
+            print(self.frame_index)
+        else:
+            self.frame_index = min(self.frame_index+1, self.frame_dur * len(self.frames) - 1)
+            if self.frame_index >= self.frame_dur * len(self.frames) - 1:
+                self.done = True
+
+    def curr_frame(self):
+        return self.frames[int(self.frame_index / self.frame_dur)]
+
+check = Animation([0,1,2])
+while True:
+    check.update()

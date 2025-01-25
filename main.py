@@ -4,7 +4,7 @@ from sys import exit
 from pygame import Surface
 
 from scripts.entity import Entity
-from scripts.utils import load_image, load_image_list
+from scripts.utils import load_image, load_image_list, Animation
 from scripts.tilemap import TileMap
 from scripts.clouds import Clouds
 
@@ -24,7 +24,13 @@ class Game:
             'stone': load_image_list('tiles/stone'),
             'player': load_image('entities/player.png').convert(),
             'background': load_image('background.png'),
-            'clouds': load_image_list('clouds')
+            'clouds': load_image_list('clouds'),
+
+            'player/idle': Animation(load_image_list('entities/player/idle'), frame_dur=6),
+            'player/run': Animation(load_image_list('entities/player/run'), frame_dur=4),
+            'player/slide': Animation(load_image_list('entities/player/slide'), frame_dur=6),
+            'player/jump': Animation(load_image_list('entities/player/jump'), frame_dur=4),
+            'player/wall-slide': Animation(load_image_list('entities/player/idle'), frame_dur=4)
         }
 
         self.clock = pygame.time.Clock()
