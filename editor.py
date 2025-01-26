@@ -20,9 +20,7 @@ class Editor:
             'grass': load_image_list('tiles/grass'),
             'large_decor': load_image_list('tiles/large_decor'),
             'spawners': load_image_list('tiles/spawners'),
-            'stone': load_image_list('tiles/stone'),
-            'background': load_image('background.png'),
-            'clouds': load_image_list('clouds'),
+            'stone': load_image_list('tiles/stone')
         }
 
         self.clock = pygame.time.Clock()
@@ -36,7 +34,8 @@ class Editor:
         self.tile_variant = 0
 
         self.clicking = False
-        self.right_click = False
+        self.right_clicking = False
+        self.shift = False
 
     def run(self):
         while True:
@@ -60,14 +59,29 @@ class Editor:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1: #left mouse button
-                        clicking = True
+                        self.clicking = True
                         print('left click')
                     if event.button == 2: #mouse scroll button
-                        clicking = True
+                        self.clicking = True
                         print('scroll click')
                     if event.button == 3: #right mouse button
-                        clicking = True
+                        self.right_clicking = True
                         print('right click')
+                    if self.shift:
+                        self.tile_variant = 0
+                        if event.button == 4:  # scroll up
+                            self.tile_group = (self.tile_group - 1) % len(self.tile_list)
+                            print(self.tile_list[self.tile_group])
+                        if event.button == 5:  # scroll down
+                            self.tile_group = (self.tile_group + 1) % len(self.tile_list)
+                            print(self.tile_list[self.tile_group])
+                    else:
+                        if event.button == 4:  # scroll up
+                            self.tile_variant = (self.tile_variant - 1) % len(self.assets[self.tile_list[self.tile_group]])
+                            print(self.tile_variant)
+                        if event.button == 5:  # scroll down
+                            self.tile_variant = (self.tile_variant + 1) % len(self.assets[self.tile_list[self.tile_group]])
+                            print(self.tile_variant)
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
@@ -78,6 +92,12 @@ class Editor:
                         self.movement[2] = True
                     if event.key == pygame.K_DOWN:
                         self.movement[3] = True
+
+                    if event.key == pygame.K_LSHIFT:
+                        if self.shift:
+                            self.shift = False
+                        else:
+                            self.shift = True
 
 
                 if event.type == pygame.KEYUP:
